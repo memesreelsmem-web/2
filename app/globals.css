@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-vazir), ui-sans-serif, system-ui, sans-serif;
+
+  /* Paper / surface tones */
+  --color-paper: #faf5e7;
+  --color-paper-2: #f3ecd8;
+  --color-paper-3: #ebe2c4;
+  --color-card: #ffffff;
+  --color-ink: #1c1612;
+  --color-ink-2: #4a3f33;
+  --color-ink-3: #7a6e5e;
+  --color-rule: #e0d4b8;
+  --color-rule-2: #c9b98a;
+
+  /* Persian palette */
+  --color-teal: #0d6f6a;
+  --color-teal-2: #094f4a;
+  --color-teal-3: #1a8a82;
+  --color-saffron: #c8853a;
+  --color-saffron-2: #a86a25;
+  --color-saffron-3: #e8a850;
+  --color-vermilion: #a83a3a;
+  --color-night: #1a2a4a;
+  --color-amber: #d8a83a;
+}
+
+html,
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-feature-settings: "ss01", "ss02";
+}
+
+/* Persian numerals option for non-numeric flow */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Latin numbers / prices kept in latin numerals, displayed LTR within RTL flow */
+.lat {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-feature-settings: "tnum";
+}
+
+/* Subtle paper grain — barely visible noise */
+.paper-grain {
+  background-image:
+    radial-gradient(rgba(28, 22, 18, 0.04) 1px, transparent 1px),
+    radial-gradient(rgba(28, 22, 18, 0.025) 1px, transparent 1px);
+  background-size: 4px 4px, 11px 11px;
+  background-position: 0 0, 2px 2px;
+}
+
+/* Persian ornament thin band — interlocking 8-pointed stars */
+.ornament-band {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'><g fill='none' stroke='%23c9b98a' stroke-width='0.8'><path d='M0 6h40'/><path d='M6 6l6-3 6 3-6 3z'/><path d='M22 6l6-3 6 3-6 3z'/></g></svg>");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: 40px 12px;
+  height: 12px;
+}
+
+.ornament-thick {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='24' viewBox='0 0 80 24'><g fill='none' stroke='%23c8853a' stroke-width='1.2'><path d='M0 12h80'/><circle cx='12' cy='12' r='5'/><circle cx='40' cy='12' r='5'/><circle cx='68' cy='12' r='5'/><path d='M5 12l3-3 4 0 3 3-3 3-4 0z'/><path d='M33 12l3-3 4 0 3 3-3 3-4 0z'/><path d='M61 12l3-3 4 0 3 3-3 3-4 0z'/></g></svg>");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: 80px 24px;
+  height: 24px;
+}
+
+/* Eight-pointed star repeating tile (Shamsa) — used as faint hero backdrop */
+.tiles-shamsa {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%230d6f6a' stroke-opacity='0.18' stroke-width='0.9'><path d='M60 10 L70 30 L90 22 L82 42 L102 50 L82 58 L90 78 L70 70 L60 90 L50 70 L30 78 L38 58 L18 50 L38 42 L30 22 L50 30 Z'/><circle cx='60' cy='50' r='14'/></g></svg>");
+  background-repeat: repeat;
+  background-size: 120px 120px;
+}
+
+/* Crosshatch faint grid for product card backdrop */
+.tiles-grid {
+  background-image:
+    linear-gradient(135deg, rgba(13, 111, 106, 0.06) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(13, 111, 106, 0.06) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+/* Latin font for numbers / latin text inside Persian blocks */
+.font-latin {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+}
+
+/* Subtle hover lift for cards */
+.card-lift {
+  transition: transform 180ms ease, box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-rule-2);
+}
+
+/* Telegram chip icon outline (used in CTA) */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Nice focus ring */
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Strong divider with center medallion */
+.medallion-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-rule-2);
+}
+.medallion-divider::before,
+.medallion-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to left,
+    transparent,
+    var(--color-rule-2),
+    transparent
+  );
+}

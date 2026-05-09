@@ -1,0 +1,121 @@
+import Link from "next/link";
+import { CoinIcon, BoltIcon, ShieldIcon, TelegramIcon } from "./icons";
+
+export default function UsdtBanner() {
+  return (
+    <section className="relative overflow-hidden rounded-3xl border border-rule-2 bg-teal text-paper">
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='none' stroke='white' stroke-width='1'><path d='M80 8 L98 50 L142 56 L108 88 L120 132 L80 108 L40 132 L52 88 L18 56 L62 50 Z'/><circle cx='80' cy='80' r='20'/></g></svg>\")",
+          backgroundSize: "180px",
+          backgroundRepeat: "repeat",
+        }}
+      />
+      <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 sm:p-12">
+        <div className="lg:col-span-7">
+          <p className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1 rounded-full bg-paper/15 border border-paper/20">
+            <CoinIcon className="size-4" />
+            پرداخت با ارز دیجیتال
+          </p>
+          <h2 className="mt-4 text-3xl sm:text-4xl font-bold tracking-tight leading-tight">
+            تتر بدهید، اشتراک بگیرید — به همین سادگی
+          </h2>
+          <p className="mt-4 text-paper/85 leading-8 max-w-2xl">
+            تمام پرداخت‌ها از طریق تتر USDT انجام می‌شود. شبکه‌های TRC-20 (ترون)،
+            BEP-20 (BSC)، TON و ERC-20 پشتیبانی می‌شوند. کارمزد شبکه ترون فقط
+            ۱ دلار است و انتقال در ۲ تا ۵ دقیقه تأیید می‌شود. نیازی به کارت
+            بانکی، Wise یا Skrill نیست.
+          </p>
+
+          <ul className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <li className="flex items-start gap-2 text-sm">
+              <BoltIcon className="size-5 mt-0.5 text-amber" />
+              <span>
+                تأیید تراکنش
+                <br />
+                <span className="text-paper/75 text-xs">۲ تا ۵ دقیقه</span>
+              </span>
+            </li>
+            <li className="flex items-start gap-2 text-sm">
+              <ShieldIcon className="size-5 mt-0.5 text-amber" />
+              <span>
+                بدون نیاز به کارت
+                <br />
+                <span className="text-paper/75 text-xs">یا وی‌پی‌ان پرداخت</span>
+              </span>
+            </li>
+            <li className="flex items-start gap-2 text-sm">
+              <CoinIcon className="size-5 mt-0.5 text-amber" />
+              <span>
+                کارمزد بسیار پایین
+                <br />
+                <span className="text-paper/75 text-xs">از ۱ دلار</span>
+              </span>
+            </li>
+          </ul>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/payment"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-paper text-teal text-sm font-semibold hover:bg-paper-3 transition"
+            >
+              راهنمای کامل پرداخت تتر
+            </Link>
+            <Link
+              href="https://t.me/parsigate_support"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-paper/40 text-paper text-sm font-semibold hover:bg-paper/10 transition"
+            >
+              <TelegramIcon className="size-4" />
+              مشاوره پرداخت
+            </Link>
+          </div>
+        </div>
+
+        <div className="lg:col-span-5 flex items-center justify-center">
+          <NetworkRing />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function NetworkRing() {
+  const networks = [
+    { label: "TRC-20", sub: "Tron", angle: 0 },
+    { label: "BEP-20", sub: "BSC", angle: 72 },
+    { label: "TON", sub: "Ton", angle: 144 },
+    { label: "ERC-20", sub: "Ethereum", angle: 216 },
+    { label: "Polygon", sub: "MATIC", angle: 288 },
+  ];
+  const r = 110;
+  return (
+    <div className="relative size-[280px] sm:size-[320px]">
+      <div className="absolute inset-6 rounded-full border-2 border-paper/15" />
+      <div className="absolute inset-12 rounded-full border border-paper/15" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="size-28 rounded-full bg-paper text-teal flex flex-col items-center justify-center font-semibold">
+          <span className="text-2xl">USDT</span>
+          <span className="text-[11px] text-ink-2 mt-0.5">Tether</span>
+        </div>
+      </div>
+      {networks.map((n) => {
+        const rad = (n.angle * Math.PI) / 180;
+        const x = Math.cos(rad) * r;
+        const y = Math.sin(rad) * r;
+        return (
+          <div
+            key={n.label}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-paper/12 border border-paper/30 text-xs font-medium backdrop-blur-sm"
+            style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
+          >
+            <span className="lat font-latin">{n.label}</span>
+            <span className="text-paper/60 lat font-latin"> · {n.sub}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
