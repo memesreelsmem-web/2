@@ -5,6 +5,9 @@ import { CATEGORIES, CATEGORY_BY_SLUG } from "@/lib/categories";
 import { servicesByCategory } from "@/lib/services";
 import ServiceCard from "@/app/components/service-card";
 import { ArrowLeftIcon } from "@/app/components/icons";
+import Faq from "@/app/components/faq";
+import { abs, SITE_NAME } from "@/lib/config";
+import { CATEGORY_CONTENT } from "@/lib/category-content";
 
 export async function generateStaticParams() {
   return CATEGORIES.map((c) => ({ slug: c.slug }));
@@ -18,10 +21,19 @@ export async function generateMetadata({
   const { slug } = await params;
   const category = CATEGORY_BY_SLUG[slug];
   if (!category) return {};
+  const count = servicesByCategory(slug).length;
+  const title = `خرید ${category.nameFa} با تتر USDT — تحویل ۱۵ دقیقه (${count} سرویس)`;
+  const description = `${category.descriptionFa} پرداخت با تتر USDT روی همه شبکه‌ها (TRC-20، TON، BEP-20)، فعال‌سازی روی اکانت شخصی شما، تحویل کمتر از ۱۵ دقیقه. ${count} سرویس فعال در ${SITE_NAME}.`;
   return {
-    title: `${category.nameFa} | پارسی‌گیت`,
-    description: `${category.descriptionFa} پرداخت با تتر USDT.`,
+    title,
+    description,
     alternates: { canonical: `/category/${category.slug}` },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: abs(`/category/${category.slug}`),
+    },
   };
 }
 
@@ -38,9 +50,60 @@ export default async function CategoryPage({
   const otherCategories = CATEGORIES.filter(
     (c) => c.slug !== slug && c.group === category.group
   ).slice(0, 4);
+  const content = CATEGORY_CONTENT[slug as keyof typeof CATEGORY_CONTENT];
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: category.nameFa,
+    numberOfItems: services.length,
+    itemListElement: services.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: abs(`/service/${s.slug}`),
+      name: s.nameFa,
+    })),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "صفحه اصلی", item: abs("/") },
+      { "@type": "ListItem", position: 2, name: category.nameFa, item: abs(`/category/${category.slug}`) },
+    ],
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {content?.faq && content.faq.length > 0 && (
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: content.faq.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            }),
+          }}
+        />
+      )}
+
       <section
         className="border-b border-rule relative overflow-hidden"
         style={{ background: `${category.accent}10` }}
@@ -72,10 +135,10 @@ export default async function CategoryPage({
                 <span className="lat font-latin">{category.subtitleFa}</span>
               </p>
               <h1 className="mt-4 text-3xl sm:text-5xl font-bold text-ink leading-tight">
-                {category.nameFa}
+                {content?.h1 ?? `خرید ${category.nameFa} با تتر USDT`}
               </h1>
               <p className="mt-4 text-base sm:text-lg text-ink-2 leading-8 max-w-3xl">
-                {category.descriptionFa}
+                {content?.lead ?? category.descriptionFa}
               </p>
             </div>
             <div className="lg:col-span-4 lg:text-left">
@@ -104,6 +167,25 @@ export default async function CategoryPage({
         )}
       </section>
 
+      {content?.intro && content.intro.length > 0 && (
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-12">
+          <div className="prose prose-rtl prose-ink max-w-none">
+            {content.intro.map((para, i) => (
+              <p key={i} className="text-base text-ink-2 leading-8 mb-5">
+                {para}
+              </p>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {content?.faq && content.faq.length > 0 && (
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-16">
+          <h2 className="text-2xl font-bold text-ink mb-6">سوال‌های متداول</h2>
+          <Faq items={content.faq} />
+        </section>
+      )}
+
       {otherCategories.length > 0 && (
         <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
           <h2 className="text-lg font-semibold text-ink mb-5">
@@ -128,25 +210,6 @@ export default async function CategoryPage({
           </div>
         </section>
       )}
-
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: category.nameFa,
-            itemListElement: services.map((s, i) => ({
-              "@type": "ListItem",
-              position: i + 1,
-              url: `https://parsigate.shop/service/${s.slug}`,
-              name: s.nameFa,
-            })),
-          }),
-        }}
-      />
     </>
   );
 }

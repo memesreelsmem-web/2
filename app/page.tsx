@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import Hero from "./components/hero";
 import TrustStrip from "./components/trust-strip";
 import SectionHeading from "./components/section-heading";
@@ -9,11 +10,11 @@ import OrderSteps from "./components/order-steps";
 import Faq from "./components/faq";
 import { CATEGORIES } from "@/lib/categories";
 import { SERVICES, servicesByCategory } from "@/lib/services";
+import { latestPosts } from "@/lib/blog";
+import { formatPersianDate } from "@/lib/persian-calendar";
 
 export const metadata: Metadata = {
-  title: "خرید اشتراک هوش مصنوعی، VPN و گیفت کارت با تتر | پارسی‌گیت",
-  description:
-    "مارکت‌پلیس ایرانی برای خرید اشتراک ChatGPT Plus، Claude Pro، Midjourney، Cursor، Spotify و ده‌ها سرویس دیگر با پرداخت تتر USDT. تحویل تا ۱۵ دقیقه.",
+  alternates: { canonical: "/" },
 };
 
 const HOME_FAQ = [
@@ -41,6 +42,14 @@ const HOME_FAQ = [
     q: "اگر اشتراک قبل از پایان مدت قطع شد چه می‌شود؟",
     a: "همه سرویس‌ها گارانتی فعال‌بودن تا انتهای دوره را دارند. در صورت بروز هر مشکل، اشتراک شما رایگان جایگزین یا مبلغش بازگردانده می‌شود.",
   },
+  {
+    q: "تفاوت پارسی‌گیت با گروه‌های فروش اکانت تلگرامی چیست؟",
+    a: "ما اکانت مشترک یا کرک‌شده نمی‌فروشیم. هر اشتراک قانونی و فعال روی ایمیل شخصی شما با IP خارجی فعال می‌شود. هیچ ریسک مسدودیتی وجود ندارد و کنترل کامل اکانت با شماست.",
+  },
+  {
+    q: "چقدر طول می‌کشد تا اشتراک تحویل داده شود؟",
+    a: "حداکثر ۱۵ دقیقه پس از تأیید پرداخت. در بیش از ۹۰٪ موارد تحویل زیر ۵ دقیقه است.",
+  },
 ];
 
 export default function HomePage() {
@@ -50,6 +59,7 @@ export default function HomePage() {
   const vpns = servicesByCategory("vpn").slice(0, 4);
   const threed = servicesByCategory("3d-marketplace").slice(0, 4);
   const subscriptions = servicesByCategory("subscription").slice(0, 4);
+  const recentPosts = latestPosts(6);
 
   const categoryCounts = Object.fromEntries(
     CATEGORIES.map((c) => [c.slug, servicesByCategory(c.slug).length])
@@ -60,23 +70,6 @@ export default function HomePage() {
       <Hero />
       <TrustStrip />
 
-      {/* JSON-LD: Organization */}
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "پارسی‌گیت",
-            alternateName: "Parsigate",
-            url: "https://parsigate.shop",
-            description:
-              "مارکت‌پلیس ایرانی برای خرید اشتراک سرویس‌های جهانی هوش مصنوعی با پرداخت تتر",
-            sameAs: ["https://t.me/parsigate_support"],
-          }),
-        }}
-      />
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -98,7 +91,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Catalog"
           title="در پارسی‌گیت چه می‌توانید بخرید؟"
-          subtitle="بیش از ۵۰ سرویس فعال در ۱۳ دسته. روی هر دسته کلیک کنید و کاتالوگ کامل را ببینید."
+          subtitle="بیش از ۷۰ سرویس فعال در ۱۳ دسته. روی هر دسته کلیک کنید و کاتالوگ کامل را ببینید."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {CATEGORIES.map((c) => (
@@ -214,6 +207,40 @@ export default function HomePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {subscriptions.map((s) => (
             <ServiceCard key={s.slug} service={s} />
+          ))}
+        </div>
+      </section>
+
+      {/* BLOG */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <SectionHeading
+          eyebrow="Blog"
+          title="مقاله‌های راهنما و آموزش"
+          subtitle="جدیدترین راهنماهای خرید، مقایسه سرویس‌ها و آموزش‌های پرداخت با تتر"
+          viewAllHref="/blog"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {recentPosts.map((p) => (
+            <Link
+              key={p.slug}
+              href={`/blog/${p.slug}`}
+              className="group block rounded-2xl border border-rule bg-card p-6 card-lift"
+            >
+              <p className="text-[11px] text-ink-3 flex items-center gap-2">
+                <span>{formatPersianDate(p.dateIso)}</span>
+                <span>·</span>
+                <span>{p.readingMinutes} دقیقه مطالعه</span>
+              </p>
+              <h3 className="mt-3 text-base font-semibold text-ink leading-7 line-clamp-2 group-hover:text-teal">
+                {p.title}
+              </h3>
+              <p className="mt-2 text-sm text-ink-2 leading-7 line-clamp-3">
+                {p.excerpt}
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-teal">
+                ادامه مطلب →
+              </span>
+            </Link>
           ))}
         </div>
       </section>

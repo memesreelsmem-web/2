@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TelegramIcon, ArrowLeftIcon, ShieldIcon, BoltIcon, CoinIcon } from "./icons";
+import { TELEGRAM_SUPPORT_URL } from "@/lib/config";
 
 export default function Hero() {
   return (
@@ -43,7 +44,7 @@ export default function Hero() {
                 <ArrowLeftIcon className="size-4" />
               </Link>
               <Link
-                href="https://t.me/parsigate_support"
+                href={TELEGRAM_SUPPORT_URL}
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-paper text-ink border border-rule-2 text-sm font-semibold hover:border-teal hover:text-teal transition"
               >
                 <TelegramIcon className="size-4" />

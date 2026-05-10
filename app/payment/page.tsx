@@ -8,12 +8,20 @@ import {
   CheckIcon,
 } from "@/app/components/icons";
 import Faq from "@/app/components/faq";
+import { TELEGRAM_SUPPORT_URL } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "پرداخت با تتر USDT — راهنمای کامل کاربران ایرانی",
+  title:
+    "پرداخت با تتر USDT — راهنمای کامل کاربران ایرانی ۲۰۲۶ | شبکه‌های TRC-20، TON و …",
   description:
-    "روش پرداخت اشتراک‌های هوش مصنوعی، گیفت کارت و وی‌پی‌ان با تتر USDT. شبکه‌های TRC-20، TON، BEP-20، ERC-20 و Polygon. کارمزد پایین و تأیید سریع.",
+    "همه چیز درباره پرداخت اشتراک هوش مصنوعی، گیفت کارت و وی‌پی‌ان با تتر USDT برای ایرانیان. مقایسه شبکه‌های TRC-20، TON، BEP-20، ERC-20 و Polygon از نظر کارمزد، سرعت تأیید و امنیت. گام‌به‌گام، با مثال نوبیتکس.",
   alternates: { canonical: "/payment" },
+  openGraph: {
+    title: "پرداخت با تتر USDT — راهنمای کامل کاربران ایرانی",
+    description:
+      "همه چیز درباره پرداخت با تتر USDT برای ایرانیان: شبکه‌ها، کارمزد، نحوه ارسال از نوبیتکس و …",
+    type: "article",
+  },
 };
 
 const NETWORKS = [
@@ -184,7 +192,7 @@ export default function PaymentPage() {
 
         <div className="mt-10 flex flex-wrap gap-3">
           <Link
-            href="https://t.me/parsigate_support"
+            href={TELEGRAM_SUPPORT_URL}
             className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-teal text-paper text-sm font-semibold hover:bg-teal-2"
           >
             <TelegramIcon className="size-4" />

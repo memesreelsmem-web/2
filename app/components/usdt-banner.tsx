@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CoinIcon, BoltIcon, ShieldIcon, TelegramIcon } from "./icons";
+import { TELEGRAM_SUPPORT_URL } from "@/lib/config";
 
 export default function UsdtBanner() {
   return (
@@ -65,7 +66,7 @@ export default function UsdtBanner() {
               راهنمای کامل پرداخت تتر
             </Link>
             <Link
-              href="https://t.me/parsigate_support"
+              href={TELEGRAM_SUPPORT_URL}
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-paper/40 text-paper text-sm font-semibold hover:bg-paper/10 transition"
             >
               <TelegramIcon className="size-4" />

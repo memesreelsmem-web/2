@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Logo } from "./logo";
 import { TelegramIcon } from "./icons";
+import { TELEGRAM_SUPPORT_URL } from "@/lib/config";
+import SiteSearch from "./site-search";
 
 const NAV = [
   { href: "/category/ai-chat", label: "هوش مصنوعی" },
@@ -8,8 +10,8 @@ const NAV = [
   { href: "/category/3d-marketplace", label: "مدل سه‌بعدی" },
   { href: "/category/vpn", label: "وی‌پی‌ان و پراکسی" },
   { href: "/category/gift-card", label: "گیفت کارت" },
+  { href: "/blog", label: "بلاگ" },
   { href: "/payment", label: "پرداخت تتر" },
-  { href: "/how-to-order", label: "راهنمای خرید" },
 ];
 
 export default function SiteHeader() {
@@ -21,7 +23,7 @@ export default function SiteHeader() {
           <Logo />
 
           <nav
-            className="hidden lg:flex items-center gap-1 text-sm"
+            className="hidden xl:flex items-center gap-1 text-sm"
             aria-label="منوی اصلی"
           >
             {NAV.map((item) => (
@@ -36,39 +38,17 @@ export default function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <SiteSearch />
             <Link
-              href="https://t.me/parsigate_support"
+              href={TELEGRAM_SUPPORT_URL}
               className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal text-paper text-sm font-medium hover:bg-teal-2 transition"
             >
               <TelegramIcon className="size-4" />
               پشتیبانی تلگرام
             </Link>
-            <Link
-              href="/category/ai-chat"
-              className="lg:hidden inline-flex items-center justify-center size-10 rounded-full bg-teal text-paper"
-              aria-label="جستجوی محصولات"
-            >
-              <SearchIcon className="size-5" />
-            </Link>
           </div>
         </div>
       </div>
     </header>
-  );
-}
-
-function SearchIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      className={className}
-      aria-hidden
-    >
-      <circle cx="11" cy="11" r="7" />
-      <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-    </svg>
   );
 }

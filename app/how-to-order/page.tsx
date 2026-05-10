@@ -3,11 +3,11 @@ import Link from "next/link";
 import OrderSteps from "@/app/components/order-steps";
 import { TelegramIcon, CheckIcon } from "@/app/components/icons";
 import Faq from "@/app/components/faq";
+import { TELEGRAM_SUPPORT_URL, SITE_NAME } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "راهنمای خرید — چگونه از پارسی‌گیت سفارش دهیم؟",
-  description:
-    "مراحل خرید اشتراک هوش مصنوعی، گیفت کارت و وی‌پی‌ان از پارسی‌گیت. سفارش از طریق تلگرام، پرداخت با تتر، تحویل کمتر از ۱۵ دقیقه.",
+  title: `راهنمای خرید — چطور از ${SITE_NAME} سفارش دهیم؟ (۲۰۲۶)`,
+  description: `مراحل کامل خرید اشتراک هوش مصنوعی، گیفت کارت و وی‌پی‌ان از ${SITE_NAME}: انتخاب محصول، سفارش از تلگرام، پرداخت با تتر USDT، تحویل کمتر از ۱۵ دقیقه. بدون ثبت‌نام، بدون فرم پیچیده.`,
   alternates: { canonical: "/how-to-order" },
 };
 
@@ -47,7 +47,7 @@ export default function HowToOrderPage() {
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
-              href="https://t.me/parsigate_support"
+              href={TELEGRAM_SUPPORT_URL}
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-teal text-paper text-sm font-semibold hover:bg-teal-2"
             >
               <TelegramIcon className="size-4" />

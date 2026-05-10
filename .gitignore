@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# devin internal artifacts (analysis docs / test reports)
+/test-plan.md
+/test-report.md
+/competitor-analysis.md
+/checklist.txt
