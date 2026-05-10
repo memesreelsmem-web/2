@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { TelegramIcon, ArrowLeftIcon, ShieldIcon, BoltIcon, CoinIcon } from "./icons";
 import { TELEGRAM_SUPPORT_URL } from "@/lib/config";
+import UsdtRateWidget from "./usdt-rate-widget";
 
 export default function Hero() {
   return (
@@ -18,10 +19,13 @@ export default function Hero() {
 
           {/* Leading column in RTL (right side) — text */}
           <div className="lg:col-span-7 lg:order-1">
-            <p className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium rounded-full bg-paper-2 border border-rule-2 text-ink-2">
-              <span className="size-1.5 rounded-full bg-teal" />
-              مارکت‌پلیس مخصوص ایرانیان — پرداخت با تتر USDT
-            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium rounded-full bg-paper-2 border border-rule-2 text-ink-2">
+                <span className="size-1.5 rounded-full bg-teal" />
+                مارکت‌پلیس مخصوص ایرانیان — پرداخت با تتر USDT
+              </p>
+              <UsdtRateWidget />
+            </div>
 
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] tracking-tight">
               دروازه پارسی شما به{" "}

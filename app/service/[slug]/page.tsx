@@ -14,6 +14,7 @@ import {
 import ServiceCard from "@/app/components/service-card";
 import Faq from "@/app/components/faq";
 import { abs, buildTelegramStart, TELEGRAM_SUPPORT_URL } from "@/lib/config";
+import { SERVICE_CONTENT, type ContentBlock } from "@/lib/service-content";
 
 export async function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -144,6 +145,9 @@ export default async function ServicePage({
       { "@type": "ListItem", position: 3, name: service.nameFa, item: abs(`/service/${service.slug}`) },
     ],
   };
+
+  const extended = SERVICE_CONTENT[service.slug];
+  const faqList = extended?.faq ?? service.faq ?? [];
 
   return (
     <>
@@ -407,8 +411,96 @@ export default async function ServicePage({
         </div>
       </section>
 
+      {/* Long-form content for top services */}
+      {extended && (
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="mb-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron-2 lat font-latin">
+              Guide
+            </p>
+            <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-ink">
+              راهنمای کامل خرید و استفاده از {service.nameFa}
+            </h2>
+          </div>
+          <div className="space-y-5">
+            {extended.longBody.map((b, i) => (
+              <BlockRenderer key={i} block={b} />
+            ))}
+          </div>
+
+          {extended.whoFor && extended.whoFor.length > 0 && (
+            <div className="mt-10 rounded-2xl border border-rule bg-paper-2 p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron-2 lat font-latin">
+                Who is it for?
+              </p>
+              <h3 className="mt-2 text-lg font-bold text-ink">
+                این سرویس برای چه کسی مناسب است؟
+              </h3>
+              <ul className="mt-4 space-y-2 text-sm text-ink-2">
+                {extended.whoFor.map((w, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <CheckIcon className="size-4 text-teal mt-1 shrink-0" />
+                    <span>{w}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* Comparison table */}
+      {extended?.compareRows && extended.compareRows.length > 0 && (
+        <section className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pb-12">
+          <div className="mb-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron-2 lat font-latin">
+              Compare
+            </p>
+            <h2 className="mt-2 text-2xl font-bold text-ink">
+              مقایسه پلن‌ها در یک نگاه
+            </h2>
+          </div>
+          <div className="overflow-x-auto rounded-2xl border border-rule">
+            <table className="w-full text-sm">
+              <thead className="bg-paper-2">
+                <tr>
+                  <th className="text-right px-4 py-3 font-semibold text-ink">
+                    قابلیت
+                  </th>
+                  {Object.keys(extended.compareRows[0].values).map((col) => (
+                    <th
+                      key={col}
+                      className="text-right px-4 py-3 font-semibold text-ink"
+                    >
+                      {col}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {extended.compareRows.map((row, i) => (
+                  <tr
+                    key={i}
+                    className={i % 2 === 0 ? "bg-card" : "bg-paper-2/50"}
+                  >
+                    <td className="px-4 py-3 text-ink-2 font-medium">
+                      {row.label}
+                    </td>
+                    {Object.values(row.values).map((v, j) => (
+                      <td key={j} className="px-4 py-3 text-ink-2">
+                        {v}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
       {/* FAQ */}
-      {service.faq && service.faq.length > 0 && (
+      {faqList.length > 0 && (
         <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="mb-8">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron-2 lat font-latin">
@@ -418,7 +510,7 @@ export default async function ServicePage({
               سوال‌های متداول درباره {service.nameFa}
             </h2>
           </div>
-          <Faq items={service.faq} />
+          <Faq items={faqList} />
           <script
             type="application/ld+json"
             // eslint-disable-next-line react/no-danger
@@ -426,7 +518,7 @@ export default async function ServicePage({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "FAQPage",
-                mainEntity: service.faq.map((f) => ({
+                mainEntity: faqList.map((f) => ({
                   "@type": "Question",
                   name: f.q,
                   acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -466,6 +558,45 @@ export default async function ServicePage({
       )}
     </>
   );
+}
+
+function BlockRenderer({ block }: { block: ContentBlock }) {
+  switch (block.type) {
+    case "p":
+      return <p className="text-base text-ink-2 leading-8">{block.text}</p>;
+    case "h2":
+      return (
+        <h2 className="text-2xl font-bold text-ink mt-10 mb-2">{block.text}</h2>
+      );
+    case "h3":
+      return (
+        <h3 className="text-lg font-semibold text-ink mt-6 mb-1">
+          {block.text}
+        </h3>
+      );
+    case "ul":
+      return (
+        <ul className="list-disc pr-6 space-y-2 text-ink-2 leading-7">
+          {block.items.map((it, i) => (
+            <li key={i}>{it}</li>
+          ))}
+        </ul>
+      );
+    case "ol":
+      return (
+        <ol className="list-decimal pr-6 space-y-2 text-ink-2 leading-7">
+          {block.items.map((it, i) => (
+            <li key={i}>{it}</li>
+          ))}
+        </ol>
+      );
+    case "callout":
+      return (
+        <aside className="rounded-2xl border border-saffron/30 bg-saffron/10 p-5 text-sm text-ink-2 leading-7">
+          {block.text}
+        </aside>
+      );
+  }
 }
 
 function CommissionPanel() {

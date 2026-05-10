@@ -8,8 +8,21 @@ function pickStartingPrice(service: Service) {
   return valid.reduce((min, t) => (t.priceUsd < min.priceUsd ? t : min));
 }
 
+function pickBestDiscount(service: Service): number | null {
+  const valid = service.tariffs.filter(
+    (t) => t.priceUsd > 0 && t.oldPriceUsd && t.oldPriceUsd > t.priceUsd
+  );
+  if (valid.length === 0) return null;
+  const best = valid.reduce((max, t) => {
+    const pct = Math.round(((t.oldPriceUsd! - t.priceUsd) / t.oldPriceUsd!) * 100);
+    return pct > max ? pct : max;
+  }, 0);
+  return best > 0 ? best : null;
+}
+
 export default function ServiceCard({ service }: { service: Service }) {
   const start = pickStartingPrice(service);
+  const discount = pickBestDiscount(service);
   const isCommission = service.tariffs.every((t) => t.priceUsd === 0);
   const textOnBrand = service.brandTextColor || "#fbf6e7";
 
@@ -47,6 +60,11 @@ export default function ServiceCard({ service }: { service: Service }) {
           </div>
 
           <div className="flex flex-col gap-1.5 items-end">
+            {discount && (
+              <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-red-600 text-white font-semibold lat font-latin">
+                {discount}% تخفیف
+              </span>
+            )}
             {service.bestseller && (
               <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-saffron text-ink font-medium">
                 پرفروش
