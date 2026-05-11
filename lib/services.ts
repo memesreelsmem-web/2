@@ -1,6 +1,7 @@
 import type { Service } from "./types";
+import { EXTENDED_SERVICES } from "./services-extended";
 
-export const SERVICES: Service[] = [
+const CURATED_SERVICES: Service[] = [
   // ===== AI CHAT =====
   {
     slug: "chatgpt-plus",
@@ -1501,6 +1502,14 @@ export const SERVICES: Service[] = [
     bestseller: true,
     region: "Global",
   },
+];
+
+// Merge curated (hand-written, top-72) + extended (auto-imported from license-market).
+// Curated takes precedence if a slug appears in both (CURATED_SERVICES first).
+const _curatedSlugs = new Set(CURATED_SERVICES.map((s) => s.slug));
+export const SERVICES: Service[] = [
+  ...CURATED_SERVICES,
+  ...EXTENDED_SERVICES.filter((s) => !_curatedSlugs.has(s.slug)),
 ];
 
 export const SERVICE_BY_SLUG: Record<string, Service> = Object.fromEntries(

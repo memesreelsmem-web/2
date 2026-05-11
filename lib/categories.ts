@@ -117,6 +117,78 @@ export const CATEGORIES: CategoryDef[] = [
     accent: "#a8324a",
     group: "extras",
   },
+  {
+    slug: "streaming",
+    nameFa: "استریم فیلم، سریال و ورزش",
+    subtitleFa: "Netflix, Disney+, Hulu, HBO Max, ESPN",
+    descriptionFa:
+      "اشتراک پلتفرم‌های استریم فیلم، سریال، انیمه و ورزش زنده با فعال‌سازی روی اکانت شخصی شما.",
+    accent: "#c53030",
+    group: "media",
+  },
+  {
+    slug: "music",
+    nameFa: "موسیقی و کتاب صوتی",
+    subtitleFa: "Spotify, Apple Music, Tidal, Deezer, Audible",
+    descriptionFa:
+      "اشتراک سرویس‌های موسیقی، رادیو و کتاب صوتی با کیفیت بالا و بدون تبلیغات.",
+    accent: "#1db954",
+    group: "media",
+  },
+  {
+    slug: "education",
+    nameFa: "آموزش آنلاین و زبان",
+    subtitleFa: "Coursera, Udemy, Skillshare, Duolingo, edX",
+    descriptionFa:
+      "اشتراک پلتفرم‌های آموزش آنلاین، دوره‌های دانشگاهی، یادگیری زبان و کسب مهارت‌های جدید.",
+    accent: "#1f5fa3",
+    group: "learn",
+  },
+  {
+    slug: "security",
+    nameFa: "امنیت و آنتی‌ویروس",
+    subtitleFa: "Norton, Bitdefender, ESET, Kaspersky, 1Password",
+    descriptionFa:
+      "لایسنس آنتی‌ویروس و سرویس‌های امنیتی، مدیر رمز عبور و حفاظت از حریم خصوصی آنلاین.",
+    accent: "#2d6a4f",
+    group: "protect",
+  },
+  {
+    slug: "finance",
+    nameFa: "بازار مالی و تحلیل",
+    subtitleFa: "TradingView, Bloomberg, eToro, Investing.com",
+    descriptionFa:
+      "اشتراک ابزار تحلیل بازار، چارت حرفه‌ای، اخبار اقتصادی و سیگنال معاملاتی.",
+    accent: "#b8860b",
+    group: "finance",
+  },
+  {
+    slug: "gaming",
+    nameFa: "بازی و اشتراک گیمینگ",
+    subtitleFa: "Xbox Game Pass, PSN Plus, EA Play, Riot Points",
+    descriptionFa:
+      "اشتراک پلتفرم‌های بازی، شارژ کیف پول گیمینگ و آیتم درون‌برنامه‌ای بازی‌های محبوب.",
+    accent: "#6b46c1",
+    group: "extras",
+  },
+  {
+    slug: "seo-tools",
+    nameFa: "ابزار سئو و دیجیتال مارکتینگ",
+    subtitleFa: "Semrush, Ahrefs, Moz, Ubersuggest",
+    descriptionFa:
+      "اشتراک ابزار سئو، تحلیل رقبا، تحقیق کلمات کلیدی و ابزار بازاریابی دیجیتال.",
+    accent: "#d97706",
+    group: "extras",
+  },
+  {
+    slug: "tools",
+    nameFa: "ابزار حرفه‌ای و SaaS",
+    subtitleFa: "Adobe, Microsoft 365, Dropbox, Notion",
+    descriptionFa:
+      "اشتراک نرم‌افزارهای حرفه‌ای، ابزارهای ابری و SaaS برای کسب‌وکار و فریلنسر.",
+    accent: "#545464",
+    group: "extras",
+  },
 ];
 
 export const CATEGORY_BY_SLUG: Record<string, CategoryDef> = Object.fromEntries(

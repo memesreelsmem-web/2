@@ -11,7 +11,15 @@ export type Category =
   | "vpn"
   | "proxy"
   | "gift-card"
-  | "subscription";
+  | "subscription"
+  | "streaming"
+  | "music"
+  | "education"
+  | "security"
+  | "finance"
+  | "gaming"
+  | "seo-tools"
+  | "tools";
 
 export type Tariff = {
   name: string;
@@ -52,5 +60,5 @@ export type CategoryDef = {
   subtitleFa: string;
   descriptionFa: string;
   accent: string;
-  group: "ai" | "3d" | "access" | "extras";
+  group: "ai" | "3d" | "access" | "extras" | "media" | "learn" | "protect" | "finance";
 };
