@@ -5,13 +5,13 @@ import { TELEGRAM_SUPPORT_URL } from "@/lib/config";
 import SiteSearch from "./site-search";
 
 const NAV = [
-  { href: "/category/ai-chat", label: "هوش مصنوعی", icon: "🤖" },
-  { href: "/category/streaming", label: "استریم", icon: "🎬" },
-  { href: "/category/music", label: "موسیقی", icon: "🎵" },
-  { href: "/category/vpn", label: "VPN", icon: "🔒" },
-  { href: "/category/education", label: "آموزش", icon: "📚" },
-  { href: "/category/tools", label: "ابزارها", icon: "⚙️" },
-  { href: "/category/gaming", label: "بازی", icon: "🎮" },
+  { href: "/category/ai-chat", label: "هوش مصنوعی" },
+  { href: "/category/streaming", label: "استریم" },
+  { href: "/category/music", label: "موسیقی" },
+  { href: "/category/vpn", label: "VPN" },
+  { href: "/category/education", label: "آموزش" },
+  { href: "/category/tools", label: "ابزارها" },
+  { href: "/category/gaming", label: "بازی" },
 ];
 
 export default function SiteHeader() {
@@ -29,9 +29,8 @@ export default function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-ink-2 hover:text-teal hover:bg-paper-3 transition"
+                className="px-3 py-2 rounded-lg text-ink-2 hover:text-teal hover:bg-paper-3 transition"
               >
-                <span className="text-base">{item.icon}</span>
                 {item.label}
               </Link>
             ))}

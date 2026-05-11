@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { TelegramIcon, ArrowLeftIcon, ShieldIcon, BoltIcon, CoinIcon } from "./icons";
 import { TELEGRAM_SUPPORT_URL } from "@/lib/config";
 import UsdtRateWidget from "./usdt-rate-widget";
@@ -10,7 +11,7 @@ const PROMO_BANNERS = [
     price: "از $25",
     gradient: "from-emerald-600 to-cyan-700",
     href: "/service/chatgpt-plus",
-    emoji: "🤖",
+    logo: "/logos/openai.png",
   },
   {
     title: "Claude Pro",
@@ -18,7 +19,7 @@ const PROMO_BANNERS = [
     price: "از $25",
     gradient: "from-orange-600 to-amber-700",
     href: "/service/claude-pro",
-    emoji: "🧠",
+    logo: "/logos/anthropic.png",
   },
   {
     title: "Spotify Premium",
@@ -26,7 +27,7 @@ const PROMO_BANNERS = [
     price: "از $2.5",
     gradient: "from-green-600 to-emerald-800",
     href: "/service/spotify-premium",
-    emoji: "🎵",
+    logo: "/logos/spotify.png",
   },
   {
     title: "VPN اختصاصی",
@@ -34,7 +35,7 @@ const PROMO_BANNERS = [
     price: "از $5",
     gradient: "from-blue-600 to-indigo-800",
     href: "/category/vpn",
-    emoji: "🔒",
+    logo: "/logos/expressvpn.png",
   },
 ];
 
@@ -43,7 +44,6 @@ export default function Hero() {
     <section className="relative overflow-hidden">
       <div className="hero-gradient absolute inset-0 pointer-events-none" aria-hidden />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-8 lg:pt-16 lg:pb-12">
-        {/* Main hero content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-7 lg:order-1">
             <div className="flex flex-wrap items-center gap-2 mb-5">
@@ -106,15 +106,24 @@ export default function Hero() {
                 <Link
                   key={b.title}
                   href={b.href}
-                  className="group relative overflow-hidden rounded-2xl p-4 card-lift"
+                  className="group relative overflow-hidden rounded-2xl p-5 card-lift min-h-[180px]"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${b.gradient} opacity-90`} />
                   <div className="absolute inset-0 shimmer" />
-                  <div className="relative text-white">
-                    <span className="text-2xl">{b.emoji}</span>
-                    <h3 className="mt-2 text-sm font-bold">{b.title}</h3>
+                  <div className="relative text-white flex flex-col h-full">
+                    <div className="relative size-12 rounded-xl overflow-hidden bg-white/20 backdrop-blur-sm border border-white/20 mb-3">
+                      <Image
+                        src={b.logo}
+                        alt={b.title}
+                        fill
+                        className="object-contain p-2"
+                        sizes="48px"
+                        unoptimized
+                      />
+                    </div>
+                    <h3 className="text-sm font-bold lat font-latin">{b.title}</h3>
                     <p className="text-[11px] opacity-80 mt-0.5">{b.subtitle}</p>
-                    <p className="mt-2 text-xs font-semibold bg-white/20 inline-block px-2 py-0.5 rounded-full lat font-latin">
+                    <p className="mt-auto pt-3 text-xs font-semibold bg-white/20 inline-block px-2.5 py-1 rounded-full lat font-latin w-fit">
                       {b.price}
                     </p>
                   </div>

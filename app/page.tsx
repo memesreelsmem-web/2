@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Hero from "./components/hero";
 import TrustStrip from "./components/trust-strip";
 import SectionHeading from "./components/section-heading";
@@ -53,16 +54,16 @@ const HOME_FAQ = [
 ];
 
 const POPULAR_BRANDS = [
-  { name: "ChatGPT", emoji: "🤖", href: "/service/chatgpt-plus" },
-  { name: "Claude", emoji: "🧠", href: "/service/claude-pro" },
-  { name: "Midjourney", emoji: "🎨", href: "/service/midjourney" },
-  { name: "Spotify", emoji: "🎵", href: "/service/spotify-premium" },
-  { name: "Netflix", emoji: "📺", href: "/service/netflix" },
-  { name: "Canva", emoji: "✨", href: "/service/canva-pro" },
-  { name: "YouTube", emoji: "▶️", href: "/service/youtube-premium" },
-  { name: "Cursor", emoji: "💻", href: "/service/cursor" },
-  { name: "Apple", emoji: "🍎", href: "/category/gift-card" },
-  { name: "Adobe", emoji: "🎯", href: "/service/adobe-creative-cloud" },
+  { name: "ChatGPT", logo: "/logos/openai.png", href: "/service/chatgpt-plus" },
+  { name: "Claude", logo: "/logos/anthropic.png", href: "/service/claude-pro" },
+  { name: "Midjourney", logo: "/logos/midjourney.png", href: "/service/midjourney" },
+  { name: "Spotify", logo: "/logos/spotify.png", href: "/service/spotify-premium" },
+  { name: "Netflix", logo: "/logos/netflix.png", href: "/service/netflix" },
+  { name: "Canva", logo: "/logos/canva.png", href: "/service/canva-pro" },
+  { name: "YouTube", logo: "/logos/youtube.png", href: "/service/youtube-premium" },
+  { name: "Cursor", logo: "/logos/cursor.png", href: "/service/cursor" },
+  { name: "Apple", logo: "/logos/apple.png", href: "/category/gift-card" },
+  { name: "Adobe", logo: "/logos/adobe.png", href: "/service/adobe-creative-cloud" },
 ];
 
 export default function HomePage() {
@@ -111,7 +112,9 @@ export default function HomePage() {
               href={b.href}
               className="flex flex-col items-center gap-2 min-w-[80px] p-3 rounded-2xl bg-card border border-rule hover:border-teal/30 transition group"
             >
-              <span className="text-3xl group-hover:scale-110 transition-transform">{b.emoji}</span>
+              <div className="relative size-12 group-hover:scale-110 transition-transform">
+                <Image src={b.logo} alt={b.name} fill className="object-contain" sizes="48px" unoptimized />
+              </div>
               <span className="text-xs text-ink-2 group-hover:text-teal transition whitespace-nowrap lat font-latin">{b.name}</span>
             </Link>
           ))}
@@ -126,7 +129,7 @@ export default function HomePage() {
           subtitle="بهترین انتخاب‌های کاربران ایرانی"
           viewAllHref="/category/ai-chat"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
           {bestsellers.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}
@@ -143,7 +146,7 @@ export default function HomePage() {
           subtitle="ChatGPT، Claude، Gemini و Perplexity روی اکانت شخصی شما"
           viewAllHref="/category/ai-chat"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
           {aiChat.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}
@@ -158,7 +161,7 @@ export default function HomePage() {
           subtitle="Spotify، Netflix، YouTube Premium و دیگر سرویس‌های استریم"
           viewAllHref="/category/streaming"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
           {streaming.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}
@@ -178,7 +181,7 @@ export default function HomePage() {
           subtitle="Canva، Adobe، Notion و ده‌ها ابزار حرفه‌ای دیگر"
           viewAllHref="/category/tools"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
           {tools.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}
@@ -223,7 +226,7 @@ export default function HomePage() {
           subtitle="کانفیگ‌های تست‌شده روی شبکه ایران"
           viewAllHref="/category/vpn"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {vpns.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}

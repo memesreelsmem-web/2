@@ -48,6 +48,7 @@ export type Service = {
   brandColor: string;
   brandTextColor?: string;
   monogram: string;
+  imageUrl?: string;
   popular?: boolean;
   bestseller?: boolean;
   region?: string;
