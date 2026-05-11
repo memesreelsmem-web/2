@@ -102,20 +102,20 @@ export default function HomePage() {
         }}
       />
 
-      {/* POPULAR BRANDS - horizontal scroll */}
+      {/* POPULAR BRANDS — symmetric grid */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
         <h2 className="text-lg font-bold text-ink mb-5">محبوب‌ترین برندها</h2>
-        <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+        <div className="grid grid-cols-5 sm:grid-cols-5 lg:grid-cols-10 gap-3">
           {POPULAR_BRANDS.map((b) => (
             <Link
               key={b.name}
               href={b.href}
-              className="flex flex-col items-center gap-2 min-w-[80px] p-3 rounded-2xl bg-card border border-rule hover:border-teal/30 transition group"
+              className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-card border border-rule hover:border-teal/30 transition group"
             >
-              <div className="relative size-12 group-hover:scale-110 transition-transform">
+              <div className="relative size-10 sm:size-12 group-hover:scale-110 transition-transform">
                 <Image src={b.logo} alt={b.name} fill className="object-contain" sizes="48px" unoptimized />
               </div>
-              <span className="text-xs text-ink-2 group-hover:text-teal transition whitespace-nowrap lat font-latin">{b.name}</span>
+              <span className="text-[11px] text-ink-2 group-hover:text-teal transition whitespace-nowrap lat font-latin">{b.name}</span>
             </Link>
           ))}
         </div>
@@ -129,7 +129,7 @@ export default function HomePage() {
           subtitle="بهترین انتخاب‌های کاربران ایرانی"
           viewAllHref="/category/ai-chat"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4">
           {bestsellers.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}
@@ -146,7 +146,7 @@ export default function HomePage() {
           subtitle="ChatGPT، Claude، Gemini و Perplexity روی اکانت شخصی شما"
           viewAllHref="/category/ai-chat"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4">
           {aiChat.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}
@@ -161,7 +161,7 @@ export default function HomePage() {
           subtitle="Spotify، Netflix، YouTube Premium و دیگر سرویس‌های استریم"
           viewAllHref="/category/streaming"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4">
           {streaming.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}
@@ -181,7 +181,7 @@ export default function HomePage() {
           subtitle="Canva، Adobe، Notion و ده‌ها ابزار حرفه‌ای دیگر"
           viewAllHref="/category/tools"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4">
           {tools.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}
@@ -226,7 +226,7 @@ export default function HomePage() {
           subtitle="کانفیگ‌های تست‌شده روی شبکه ایران"
           viewAllHref="/category/vpn"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4">
           {vpns.map((s) => (
             <ServiceCard key={s.slug} service={s} />
           ))}
