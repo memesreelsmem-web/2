@@ -17,8 +17,8 @@ export default function Image() {
           justifyContent: "space-between",
           padding: "70px 80px",
           background:
-            "linear-gradient(135deg, #094f4a 0%, #0d6f6a 55%, #15524a 100%)",
-          color: "#fbf6e7",
+            "linear-gradient(135deg, #0f1117 0%, #171921 55%, #1e2030 100%)",
+          color: "#e8eaf0",
           fontFamily: "sans-serif",
         }}
       >
@@ -28,8 +28,8 @@ export default function Image() {
               width: 56,
               height: 56,
               borderRadius: 16,
-              background: "#e8c870",
-              color: "#0d6f6a",
+              background: "#00e6a0",
+              color: "#0f1117",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -56,7 +56,7 @@ export default function Image() {
               fontSize: 72,
               fontWeight: 800,
               lineHeight: 1.05,
-              color: "#fbf6e7",
+              color: "#e8eaf0",
             }}
           >
             AI Subscriptions for Iran
@@ -65,7 +65,7 @@ export default function Image() {
             style={{
               fontSize: 56,
               fontWeight: 700,
-              color: "#e8c870",
+              color: "#00e6a0",
               lineHeight: 1.05,
             }}
           >
@@ -89,8 +89,8 @@ export default function Image() {
                 style={{
                   padding: "10px 20px",
                   borderRadius: 999,
-                  border: "1px solid rgba(251,246,231,0.4)",
-                  background: "rgba(251,246,231,0.08)",
+                  border: "1px solid rgba(0,230,160,0.3)",
+                  background: "rgba(0,230,160,0.08)",
                 }}
               >
                 {s}
