@@ -14,7 +14,6 @@ export default function SiteFooter() {
 
   return (
     <footer className="mt-20 border-t border-rule bg-paper-2">
-      <div className="ornament-thick w-full opacity-70" aria-hidden />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
@@ -28,14 +27,14 @@ export default function SiteFooter() {
             <div className="mt-6 inline-flex flex-wrap items-center gap-2">
               <Link
                 href={TELEGRAM_SUPPORT_URL}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal text-paper text-sm font-medium hover:bg-teal-2"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal text-paper text-sm font-medium hover:bg-teal-2 transition"
               >
                 <TelegramIcon className="size-4" />
                 پشتیبانی تلگرام
               </Link>
               <Link
                 href={TELEGRAM_NEWS_URL}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-rule-2 text-ink-2 text-sm hover:bg-paper hover:border-teal"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-rule-2 text-ink-2 text-sm hover:text-teal hover:border-teal transition"
               >
                 <TelegramIcon className="size-4" />
                 کانال تخفیف‌ها
@@ -52,7 +51,7 @@ export default function SiteFooter() {
                 <li key={c.slug}>
                   <Link
                     href={`/category/${c.slug}`}
-                    className="text-ink-2 hover:text-teal"
+                    className="text-ink-2 hover:text-teal transition"
                   >
                     {c.nameFa}
                   </Link>
@@ -70,7 +69,7 @@ export default function SiteFooter() {
                 <li key={c.slug}>
                   <Link
                     href={`/category/${c.slug}`}
-                    className="text-ink-2 hover:text-teal"
+                    className="text-ink-2 hover:text-teal transition"
                   >
                     {c.nameFa}
                   </Link>
@@ -83,27 +82,27 @@ export default function SiteFooter() {
             <h4 className="text-sm font-semibold text-ink mb-3">راهنماها</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/how-to-order" className="text-ink-2 hover:text-teal">
+                <Link href="/how-to-order" className="text-ink-2 hover:text-teal transition">
                   راهنمای خرید
                 </Link>
               </li>
               <li>
-                <Link href="/payment" className="text-ink-2 hover:text-teal">
+                <Link href="/payment" className="text-ink-2 hover:text-teal transition">
                   پرداخت با تتر
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-ink-2 hover:text-teal">
+                <Link href="/blog" className="text-ink-2 hover:text-teal transition">
                   بلاگ
                 </Link>
               </li>
               <li>
-                <Link href="/best/best-ai-for-iran" className="text-ink-2 hover:text-teal">
+                <Link href="/best/best-ai-for-iran" className="text-ink-2 hover:text-teal transition">
                   بهترین هوش مصنوعی‌ها
                 </Link>
               </li>
               <li>
-                <Link href="/best/best-vpn-iran" className="text-ink-2 hover:text-teal">
+                <Link href="/best/best-vpn-iran" className="text-ink-2 hover:text-teal transition">
                   بهترین وی‌پی‌ان‌ها
                 </Link>
               </li>
@@ -114,32 +113,32 @@ export default function SiteFooter() {
             <h4 className="text-sm font-semibold text-ink mb-3">پارسی‌گیت</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about" className="text-ink-2 hover:text-teal">
+                <Link href="/about" className="text-ink-2 hover:text-teal transition">
                   درباره ما
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-ink-2 hover:text-teal">
+                <Link href="/contact" className="text-ink-2 hover:text-teal transition">
                   تماس با ما
                 </Link>
               </li>
               <li>
-                <Link href="/guarantee" className="text-ink-2 hover:text-teal">
+                <Link href="/guarantee" className="text-ink-2 hover:text-teal transition">
                   گارانتی و تضمین
                 </Link>
               </li>
               <li>
-                <Link href="/refund" className="text-ink-2 hover:text-teal">
+                <Link href="/refund" className="text-ink-2 hover:text-teal transition">
                   بازگشت وجه
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-ink-2 hover:text-teal">
+                <Link href="/terms" className="text-ink-2 hover:text-teal transition">
                   شرایط استفاده
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-ink-2 hover:text-teal">
+                <Link href="/privacy" className="text-ink-2 hover:text-teal transition">
                   حریم خصوصی
                 </Link>
               </li>
@@ -152,17 +151,17 @@ export default function SiteFooter() {
             © {new Date().getFullYear()} {SITE_NAME} — تمامی حقوق برای کاربران
             محفوظ است.
           </p>
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded bg-paper border border-rule">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded bg-paper-3 border border-rule text-ink-3 lat font-latin text-[11px]">
               USDT TRC-20
             </span>
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded bg-paper border border-rule">
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded bg-paper-3 border border-rule text-ink-3 lat font-latin text-[11px]">
               USDT TON
             </span>
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded bg-paper border border-rule">
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded bg-paper-3 border border-rule text-ink-3 lat font-latin text-[11px]">
               USDT BEP-20
             </span>
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded bg-paper border border-rule">
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded bg-paper-3 border border-rule text-ink-3 text-[11px]">
               تتر شبکه‌های دیگر
             </span>
           </div>

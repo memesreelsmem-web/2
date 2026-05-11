@@ -18,7 +18,7 @@ export default function SectionHeading({
     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
       <div className="max-w-2xl">
         {eyebrow && (
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron-2 lat font-latin">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal lat font-latin">
             {eyebrow}
           </p>
         )}

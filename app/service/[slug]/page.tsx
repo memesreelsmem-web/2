@@ -68,7 +68,7 @@ export default async function ServicePage({
     .filter((s) => s.slug !== service.slug)
     .slice(0, 4);
   const isCommission = service.tariffs.every((t) => t.priceUsd === 0);
-  const textOnBrand = service.brandTextColor || "#fbf6e7";
+  const textOnBrand = service.brandTextColor || "#e8eaf0";
   const tgUrl = buildTelegramStart(`order_${service.slug}`);
 
   const paidTariffs = service.tariffs.filter((t) => t.priceUsd > 0);

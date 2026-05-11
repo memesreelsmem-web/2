@@ -23,19 +23,19 @@ const ITEMS = [
   },
   {
     icon: StarIcon,
-    label: "+۵۰ سرویس فعال",
-    sub: "هوش مصنوعی، VPN، ۳D",
+    label: "+۱۰۰۰ سرویس فعال",
+    sub: "AI، VPN، استریم و …",
   },
 ];
 
 export default function TrustStrip() {
   return (
     <section className="border-y border-rule bg-paper-2/60">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
-        <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-5">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
+        <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4">
           {ITEMS.map(({ icon: Icon, label, sub }) => (
             <li key={label} className="flex items-start gap-3">
-              <span className="shrink-0 size-10 rounded-xl bg-paper border border-rule-2 inline-flex items-center justify-center text-teal">
+              <span className="shrink-0 size-10 rounded-xl bg-teal/10 border border-teal/20 inline-flex items-center justify-center text-teal">
                 <Icon className="size-5" />
               </span>
               <div className="flex flex-col leading-tight">

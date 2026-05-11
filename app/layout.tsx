@@ -19,7 +19,7 @@ const vazir = Vazirmatn({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0d6f6a",
+  themeColor: "#0f1117",
 };
 
 const homeTitle = `${SITE_NAME} | خرید اشتراک هوش مصنوعی، VPN و گیفت‌کارت با تتر USDT — تحویل ۱۵ دقیقه`;

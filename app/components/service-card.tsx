@@ -24,7 +24,6 @@ export default function ServiceCard({ service }: { service: Service }) {
   const start = pickStartingPrice(service);
   const discount = pickBestDiscount(service);
   const isCommission = service.tariffs.every((t) => t.priceUsd === 0);
-  const textOnBrand = service.brandTextColor || "#fbf6e7";
 
   return (
     <Link
@@ -32,27 +31,22 @@ export default function ServiceCard({ service }: { service: Service }) {
       aria-label={service.nameFa}
       className="group block rounded-2xl border border-rule bg-card overflow-hidden card-lift"
     >
+      {/* Top section with brand color gradient */}
       <div
-        className="relative h-36 px-5 pt-5 pb-4 overflow-hidden"
-        style={{ backgroundColor: service.brandColor, color: textOnBrand }}
+        className="relative h-32 px-5 pt-4 pb-3 overflow-hidden"
+        style={{
+          background: `linear-gradient(135deg, ${service.brandColor}, ${service.brandColor}dd)`,
+        }}
       >
-        <div
-          className="absolute inset-0 opacity-25 pointer-events-none"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='white' stroke-width='0.6'><path d='M40 8 L46 22 L60 18 L54 32 L68 38 L54 44 L60 58 L46 54 L40 68 L34 54 L20 58 L26 44 L12 38 L26 32 L20 18 L34 22 Z'/></g></svg>\")",
-            backgroundRepeat: "repeat",
-            backgroundSize: "60px 60px",
-          }}
-          aria-hidden
-        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
 
         <div className="relative flex items-start justify-between">
           <div
-            className="size-14 rounded-xl flex items-center justify-center text-xl font-semibold"
+            className="size-12 rounded-xl flex items-center justify-center text-lg font-bold text-white"
             style={{
-              background: "rgba(255,255,255,0.16)",
-              border: "1px solid rgba(255,255,255,0.3)",
+              background: "rgba(255,255,255,0.15)",
+              backdropFilter: "blur(8px)",
+              border: "1px solid rgba(255,255,255,0.2)",
             }}
             aria-hidden
           >
@@ -61,68 +55,61 @@ export default function ServiceCard({ service }: { service: Service }) {
 
           <div className="flex flex-col gap-1.5 items-end">
             {discount && (
-              <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-red-600 text-white font-semibold lat font-latin">
-                {discount}% تخفیف
+              <span className="badge-discount">
+                {discount}%−
               </span>
             )}
             {service.bestseller && (
-              <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-saffron text-ink font-medium">
-                پرفروش
-              </span>
-            )}
-            {service.popular && !service.bestseller && (
-              <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-paper text-ink font-medium">
-                محبوب
-              </span>
-            )}
-            {service.region && (
-              <span className="text-[10px] opacity-80">
-                {service.region}
+              <span className="badge-hot">
+                🔥 پرفروش
               </span>
             )}
           </div>
         </div>
 
-        <div className="relative mt-3">
-          <h3 className="text-lg font-semibold leading-tight line-clamp-1">
-            {service.nameFa}
-          </h3>
-          <p className="text-xs opacity-80 mt-0.5 lat font-latin">
+        <div className="relative mt-2">
+          <p className="text-xs text-white/70 lat font-latin">
             {service.name}
           </p>
         </div>
       </div>
 
-      <div className="px-5 pt-4 pb-5 space-y-4">
-        <p className="text-[13px] leading-6 text-ink-2 line-clamp-2 min-h-[3rem]">
+      {/* Bottom section */}
+      <div className="px-5 pt-4 pb-5 space-y-3">
+        <h3 className="text-sm font-semibold leading-snug line-clamp-1 text-ink">
+          {service.nameFa}
+        </h3>
+        <p className="text-[12px] leading-5 text-ink-3 line-clamp-2 min-h-[2.5rem]">
           {service.shortFa}
         </p>
 
-        <div className="flex items-end justify-between pt-1 border-t border-rule">
-          <div className="pt-3">
+        <div className="flex items-end justify-between pt-3 border-t border-rule">
+          <div>
             {isCommission ? (
               <>
                 <p className="text-[10px] text-ink-3">قیمت سرویس</p>
-                <p className="text-base font-semibold text-teal">
-                  بر اساس قیمت سایت اصلی
-                </p>
-                <p className="text-[10px] text-ink-3 mt-0.5">
-                  + ۲۵٪ کارمزد واسطه
+                <p className="text-sm font-semibold text-teal">
+                  بر اساس قیمت اصلی
                 </p>
               </>
             ) : (
               <>
-                <p className="text-[10px] text-ink-3">شروع قیمت از</p>
-                <p className="text-xl font-semibold text-teal lat font-latin">
-                  ${start?.priceUsd}
-                  <span className="text-xs text-ink-3 ms-1">USD</span>
-                </p>
-                <p className="text-[10px] text-ink-3 mt-0.5">{start?.period}</p>
+                <p className="text-[10px] text-ink-3">شروع از</p>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-xl font-bold text-teal lat font-latin">
+                    ${start?.priceUsd}
+                  </span>
+                  {start?.oldPriceUsd && (
+                    <span className="text-xs text-ink-3 line-through lat font-latin">
+                      ${start.oldPriceUsd}
+                    </span>
+                  )}
+                </div>
               </>
             )}
           </div>
-          <span className="pt-3 inline-flex items-center gap-1.5 text-sm font-medium text-teal group-hover:gap-2.5 transition-all">
-            مشاهده <ArrowLeftIcon className="size-4" />
+          <span className="inline-flex items-center gap-1 text-xs font-medium text-teal group-hover:gap-2 transition-all">
+            مشاهده <ArrowLeftIcon className="size-3.5" />
           </span>
         </div>
       </div>
